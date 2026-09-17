@@ -1,0 +1,45 @@
+{% extends 'acervo/base.html' %}
+{% block conteudo %}
+<h1>Livros do Parque</h1>
+
+<p><a href="{% url 'novo_livro' %}">Criar novo livro</a></p>
+
+<form method="GET" action="">
+    <label>Nome:</label>
+    <input type="text" name="nome" placeholder="Buscar por título...">
+
+    <label>Tipo:</label>
+    <select name="tipo">
+        <option value="">Todos</option>
+        <option value="Digital">Digital</option>
+        <option value="Físico">Físico</option>
+    </select>
+
+    <label>Categoria:</label>
+    <select name="categoria">
+        <option value="">Todas</option>
+        <option value="000">000 - Generalidades</option>
+        <option value="100">100 - Filosofia</option>
+        <option value="200">200 - Religião</option>
+        <option value="300">300 - Ciências Sociais</option>
+        <option value="400">400 - Linguística</option>
+        <option value="500">500 - Ciências Puras</option>
+        <option value="600">600 - Ciências Aplicadas</option>
+        <option value="700">700 - Artes</option>
+        <option value="800">800 - Literatura</option>
+        <option value="900">900 - História</option>
+    </select>
+
+    <button type="submit">Pesquisar</button>
+</form>
+
+<hr>
+
+<ul>
+{% for livro in livros %}
+    <li>{{ livro.titulo }} - {{ livro.autor }} ({{ livro.tipo_acervo }} / Categoria: {{ livro.categoria }})</li>
+{% empty %}
+    <li>Nenhum livro encontrado.</li>
+{% endfor %}
+</ul>
+{% endblock %}
